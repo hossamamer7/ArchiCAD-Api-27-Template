@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  AssemblyInfo.cpp
+  WpfWrapper.cpp
+  Generating Code...
+  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
+  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  WpfWrapper.vcxproj -> D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\INT\x64\Release\WpfWrapper.dll

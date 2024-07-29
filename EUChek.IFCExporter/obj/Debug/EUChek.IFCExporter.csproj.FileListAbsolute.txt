@@ -1,0 +1,22 @@
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\bin\Debug\EUChek.IFCExporter.dll
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\bin\Debug\EUChek.IFCExporter.pdb
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.csproj.AssemblyReference.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\UI\Windows\MainWindow.g.cs
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter_MarkupCompile.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter_MarkupCompile.lref
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\UI\Windows\MainWindow.baml
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.g.resources
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.csproj.CoreCompileInputs.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.dll
+D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.pdb
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\bin\Debug\EUChek.IFCExporter.dll
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\bin\Debug\EUChek.IFCExporter.pdb
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.csproj.AssemblyReference.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\UI\Windows\MainWindow.g.cs
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter_MarkupCompile.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter_MarkupCompile.lref
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\UI\Windows\MainWindow.baml
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.g.resources
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.csproj.CoreCompileInputs.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.dll
+D:\Archicad\EU Chek\archicad-addon-cmake\EUChek.IFCExporter\obj\Debug\EUChek.IFCExporter.pdb

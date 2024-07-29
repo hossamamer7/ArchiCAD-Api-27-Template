@@ -1,0 +1,2 @@
+D:\Archicad\EU Chek\archicad-addon-cmake\WpfWrapper\x64\Release\WpfWrapper.vcxproj.AssemblyReference.cache
+D:\Archicad\EU Chek\archicad-addon-cmake\WpfWrapper\x64\Release\WpfWrapp.BFAA03A6.Up2Date

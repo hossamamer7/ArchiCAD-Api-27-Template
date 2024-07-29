@@ -1,25 +1,39 @@
-cmake_minimum_required (VERSION 3.17)
+cmake_minimum_required(VERSION 3.17)
 
-include (Tools/CMakeCommon.cmake)
+include(Tools/CMakeCommon.cmake)
 
-set (API_DEVKIT_DIR $ENV{AC_API_DEVKIT_DIR})
+set(API_DEVKIT_DIR $ENV{AC_API_DEVKIT_DIR})
 
-set_property (GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set (CMAKE_CONFIGURATION_TYPES Debug;Release;RelWithDebInfo)
-set (AC_API_DEVKIT_DIR ${API_DEVKIT_DIR} CACHE PATH "API DevKit directory.")
-set (AC_ADDON_NAME "EU Chek" CACHE STRING "Add-On name.")
-set (AC_ADDON_LANGUAGE "INT" CACHE STRING "Add-On language code.")
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+
+set(CMAKE_CONFIGURATION_TYPES Debug;Release;RelWithDebInfo)
+set(AC_API_DEVKIT_DIR ${API_DEVKIT_DIR} CACHE PATH "API DevKit directory.")
+set(AC_ADDON_NAME "EU Chek" CACHE STRING "Add-On name.")
+set(AC_ADDON_LANGUAGE "INT" CACHE STRING "Add-On language code.")
 
 if (NOT DEFINED AC_VERSION)
-    message (FATAL_ERROR "AC_VERSION is not set!")
+    message(FATAL_ERROR "AC_VERSION is not set!")
 endif ()
 
-message (STATUS "Archicad Version: ${AC_VERSION}")
-SetGlobalCompilerDefinitions (${AC_VERSION})
+message(STATUS "Archicad Version: ${AC_VERSION}")
+SetGlobalCompilerDefinitions(${AC_VERSION})
 
-project (${AC_ADDON_NAME})
+project(${AC_ADDON_NAME})
 
-set (AddOnSourcesFolder Src)
-set (AddOnResourcesFolder .)
-GenerateAddOnProject (CMakeTarget ${AC_VERSION} ${AC_API_DEVKIT_DIR} ${AC_ADDON_NAME} ${AddOnSourcesFolder} ${AddOnResourcesFolder} ${AC_ADDON_LANGUAGE})
+set(AddOnSourcesFolder Src)
+set(AddOnResourcesFolder .)
+GenerateAddOnProject(CMakeTarget ${AC_VERSION} ${AC_API_DEVKIT_DIR} ${AC_ADDON_NAME} ${AddOnSourcesFolder} ${AddOnResourcesFolder} ${AC_ADDON_LANGUAGE})
+
+# Add WPF project
+add_subdirectory(WpfWrapper)
+
+# Ensure WpfWrapper is built as part of the solution
+add_dependencies(CMakeTarget WpfWrapper)
+
+message(STATUS "WpfWrapper dll initial path: ${CMAKE_BINARY_DIR}")
+
+# Link the static library
+target_link_libraries(CMakeTarget ${CMAKE_BINARY_DIR}/EU\ Chek/27/INT/WpfWrapper/Debug/WpfWrapper.lib)

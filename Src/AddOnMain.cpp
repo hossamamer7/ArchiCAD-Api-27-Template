@@ -3,112 +3,125 @@
 
 #include "ResourceIds.hpp"
 #include "DGModule.hpp"
+#include "../WpfWrapper/WpfWrapperBridge.h"
 
-static const GSResID AddOnInfoID			= ID_ADDON_INFO;
-	static const Int32 AddOnNameID			= 1;
-	static const Int32 AddOnDescriptionID	= 2;
+static const GSResID AddOnInfoID = ID_ADDON_INFO;
+static const Int32 AddOnNameID = 1;
+static const Int32 AddOnDescriptionID = 2;
 
-static const short AddOnMenuID				= ID_ADDON_MENU;
-	static const Int32 AddOnCommandID		= 1;
+static const short AddOnMenuID = ID_ADDON_MENU;
+static const Int32 AddOnCommandID = 1;
 
-class ExampleDialog :	public DG::ModalDialog,
-						public DG::PanelObserver,
-						public DG::ButtonItemObserver,
-						public DG::CompoundItemObserver
-{
+class ExampleDialog : public DG::ModalDialog,
+  public DG::PanelObserver,
+  public DG::ButtonItemObserver,
+  public DG::CompoundItemObserver {
 public:
-	enum DialogResourceIds
-	{
-		ExampleDialogResourceId = ID_ADDON_DLG,
-		OKButtonId = 1,
-		CancelButtonId = 2,
-		SeparatorId = 3
-	};
+  enum DialogResourceIds {
+    ExampleDialogResourceId = ID_ADDON_DLG,
+    OKButtonId = 1,
+    CancelButtonId = 2,
+    SeparatorId = 3
+  };
 
-	ExampleDialog () :
-		DG::ModalDialog (ACAPI_GetOwnResModule (), ExampleDialogResourceId, ACAPI_GetOwnResModule ()),
-		okButton (GetReference (), OKButtonId),
-		cancelButton (GetReference (), CancelButtonId),
-		separator (GetReference (), SeparatorId)
-	{
-		AttachToAllItems (*this);
-		Attach (*this);
-	}
+  ExampleDialog() :
+    DG::ModalDialog(ACAPI_GetOwnResModule(), ExampleDialogResourceId, ACAPI_GetOwnResModule()),
+    okButton(GetReference(), OKButtonId),
+    cancelButton(GetReference(), CancelButtonId),
+    separator(GetReference(), SeparatorId)
+  {
+    AttachToAllItems(*this);
+    Attach(*this);
+  }
 
-	~ExampleDialog ()
-	{
-		Detach (*this);
-		DetachFromAllItems (*this);
-	}
+  ~ExampleDialog()
+  {
+    Detach(*this);
+    DetachFromAllItems(*this);
+  }
 
 private:
-	virtual void PanelResized (const DG::PanelResizeEvent& ev) override
-	{
-		BeginMoveResizeItems ();
-		okButton.Move (ev.GetHorizontalChange (), ev.GetVerticalChange ());
-		cancelButton.Move (ev.GetHorizontalChange (), ev.GetVerticalChange ());
-		separator.MoveAndResize (0, ev.GetVerticalChange (), ev.GetHorizontalChange (), 0);
-		EndMoveResizeItems ();
-	}
+  virtual void PanelResized(const DG::PanelResizeEvent& ev) override
+  {
+    BeginMoveResizeItems();
+    okButton.Move(ev.GetHorizontalChange(), ev.GetVerticalChange());
+    cancelButton.Move(ev.GetHorizontalChange(), ev.GetVerticalChange());
+    separator.MoveAndResize(0, ev.GetVerticalChange(), ev.GetHorizontalChange(), 0);
+    EndMoveResizeItems();
+  }
 
-	virtual void ButtonClicked (const DG::ButtonClickEvent& ev) override
-	{
-		if (ev.GetSource () == &okButton) {
-			PostCloseRequest (DG::ModalDialog::Accept);
-		} else if (ev.GetSource () == &cancelButton) {
-			PostCloseRequest (DG::ModalDialog::Cancel);
-		}
-	}
+  virtual void ButtonClicked(const DG::ButtonClickEvent& ev) override
+  {
+    if (ev.GetSource() == &okButton) {
+      PostCloseRequest(DG::ModalDialog::Accept);
+    }
+    else if (ev.GetSource() == &cancelButton) {
+      PostCloseRequest(DG::ModalDialog::Cancel);
+    }
+  }
 
-	DG::Button		okButton;
-	DG::Button		cancelButton;
-	DG::Separator	separator;
+  DG::Button okButton;
+  DG::Button cancelButton;
+  DG::Separator separator;
 };
 
-static GSErrCode MenuCommandHandler (const API_MenuParams *menuParams)
+static GSErrCode MenuCommandHandler(const API_MenuParams* menuParams)
 {
-	switch (menuParams->menuItemRef.menuResID) {
-		case AddOnMenuID:
-			switch (menuParams->menuItemRef.itemIndex) {
-				case AddOnCommandID:
-					{
-						ExampleDialog dialog;
-						dialog.Invoke ();
-					}
-					break;
-			}
-			break;
-	}
-	return NoError;
+  ACAPI_WriteReport("MenuCommandHandler called", false);
+  switch (menuParams->menuItemRef.menuResID) {
+  case AddOnMenuID:
+    switch (menuParams->menuItemRef.itemIndex) {
+    case AddOnCommandID:
+      ACAPI_WriteReport("AddOnCommandID matched", false);
+      try {
+        ACAPI_WriteReport("Calling WpfWrapperBridge::ShowWpfWindow from MenuCommandHandler", false);
+        WpfWrapperBridge::ShowWpfWindow();
+        ACAPI_WriteReport("WpfWrapperBridge::ShowWpfWindow completed from MenuCommandHandler", false);
+      }
+      catch (const std::exception& ex) {
+        ACAPI_WriteReport(ex.what(), true);
+      }
+      catch (...) {
+        ACAPI_WriteReport("Unknown exception occurred in MenuCommandHandler.", true);
+      }
+      break;
+    }
+    break;
+  }
+  return NoError;
 }
 
-API_AddonType CheckEnvironment (API_EnvirParams* envir)
+API_AddonType CheckEnvironment(API_EnvirParams* envir)
 {
-	RSGetIndString (&envir->addOnInfo.name, AddOnInfoID, AddOnNameID, ACAPI_GetOwnResModule ());
-	RSGetIndString (&envir->addOnInfo.description, AddOnInfoID, AddOnDescriptionID, ACAPI_GetOwnResModule ());
-
-	return APIAddon_Normal;
+  ACAPI_WriteReport("CheckEnvironment called", false);
+  RSGetIndString(&envir->addOnInfo.name, AddOnInfoID, AddOnNameID, ACAPI_GetOwnResModule());
+  RSGetIndString(&envir->addOnInfo.description, AddOnInfoID, AddOnDescriptionID, ACAPI_GetOwnResModule());
+  ACAPI_WriteReport("CheckEnvironment completed", false);
+  return APIAddon_Normal;
 }
 
-GSErrCode RegisterInterface (void)
+GSErrCode RegisterInterface(void)
 {
+  ACAPI_WriteReport("RegisterInterface called", false);
 #ifdef ServerMainVers_2700
-	return ACAPI_MenuItem_RegisterMenu (AddOnMenuID, 0, MenuCode_UserDef, MenuFlag_Default);
+  return ACAPI_MenuItem_RegisterMenu(AddOnMenuID, 0, MenuCode_UserDef, MenuFlag_Default);
 #else
-	return ACAPI_Register_Menu (AddOnMenuID, 0, MenuCode_Tools, MenuFlag_Default);
+  return ACAPI_Register_Menu(AddOnMenuID, 0, MenuCode_Tools, MenuFlag_Default);
 #endif
 }
 
-GSErrCode Initialize (void)
+GSErrCode Initialize(void)
 {
+  ACAPI_WriteReport("Initialize called", false);
 #ifdef ServerMainVers_2700
-	return ACAPI_MenuItem_InstallMenuHandler (AddOnMenuID, MenuCommandHandler);
+  return ACAPI_MenuItem_InstallMenuHandler(AddOnMenuID, MenuCommandHandler);
 #else
-	return ACAPI_Install_MenuHandler (AddOnMenuID, MenuCommandHandler);
+  return ACAPI_Install_MenuHandler(AddOnMenuID, MenuCommandHandler);
 #endif
 }
 
-GSErrCode FreeData (void)
+GSErrCode FreeData(void)
 {
-	return NoError;
+  ACAPI_WriteReport("FreeData called", false);
+  return NoError;
 }
