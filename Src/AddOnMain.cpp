@@ -4,8 +4,10 @@
 #include "ResourceIds.hpp"
 #include "DGModule.hpp"
 
-#import "D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\IfcExporter\IfcExporter\obj\Debug\com.IfcExporter.tlb" named_guids raw_interfaces_only
+#import TLB_PATH named_guids raw_interfaces_only
+
 using namespace IfcExporter;
+
 static const GSResID AddOnInfoID			= ID_ADDON_INFO;
 	static const Int32 AddOnNameID			= 1;
 	static const Int32 AddOnDescriptionID	= 2;
