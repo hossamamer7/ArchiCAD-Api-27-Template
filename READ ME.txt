@@ -1,0 +1,16 @@
+## After you clone the project you need to run build_commands.bat then follow these steps...
+
+
+1) open Visual studio in Administration mode.
+2) Clean the solution.
+3) Rebuild IfcExporter project.
+4) right click on CMakeTarget and open properties -> c/c++ -> preprocessor -> Preprocessor Definitions -> Edit 
+then write the following:
+TLB_PATH="$(SolutionDir)..\..\..\..\IfcExporter\obj\Debug\com.IfcExporter.tlb"
+
+5) Open the Developer PowerShell then use these commands:
+	1- cd "<Path to IfcExporter project>\obj\Debug"
+	2- gacutil /i IfcExporter.dll
+	3- C:\Windows\Microsoft.NET\Framework64\v4.0.30319\regasm IfcExporter.dll /tlb:com.IfcExporter.tlb /codebase
+
+5) Rebuild the solution
