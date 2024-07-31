@@ -4,6 +4,8 @@
 #include "ResourceIds.hpp"
 #include "DGModule.hpp"
 
+#import "D:\Archicad\EU Chek\archicad-addon-cmake\Build\EU Chek\27\IfcExporter\IfcExporter\obj\Debug\com.IfcExporter.tlb" named_guids raw_interfaces_only
+using namespace IfcExporter;
 static const GSResID AddOnInfoID			= ID_ADDON_INFO;
 	static const Int32 AddOnNameID			= 1;
 	static const Int32 AddOnDescriptionID	= 2;
@@ -72,9 +74,21 @@ static GSErrCode MenuCommandHandler (const API_MenuParams *menuParams)
 			switch (menuParams->menuItemRef.itemIndex) {
 				case AddOnCommandID:
 					{
-						ExampleDialog dialog;
-						dialog.Invoke ();
+					CoInitialize(NULL);   //Initialize all COM Components
+
+					IfcExporter::IMyDotNetInterfacePtr pDotNetCOMPtr;
+
+					HRESULT hRes =
+						pDotNetCOMPtr.CreateInstance(IfcExporter::CLSID_MyDotNetClass);
+					if (hRes == S_OK)
+					{
+						_bstr_t data("Hello from C++");
+						pDotNetCOMPtr->PassData(data);
+						pDotNetCOMPtr->ShowCOMDialog();
 					}
+
+					CoUninitialize();   //DeInitialize all COM Components
+				}
 					break;
 			}
 			break;
