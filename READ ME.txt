@@ -13,4 +13,7 @@ TLB_PATH="$(SolutionDir)..\..\..\..\IfcExporter\obj\Debug\com.IfcExporter.tlb"
 	2- gacutil /i IfcExporter.dll
 	3- C:\Windows\Microsoft.NET\Framework64\v4.0.30319\regasm IfcExporter.dll /tlb:com.IfcExporter.tlb /codebase
 
-5) Rebuild the solution
+6) Rebuild the solution.
+
+
+## Every time you pull changes you need to do all the steps except step number 4.
